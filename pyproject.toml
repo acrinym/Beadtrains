@@ -1,13 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "beadtrains"
-version = "1.3.0"
+version = "1.3.1"
 description = "Full-train execution manifests for Beads (bd)"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 
+[project.scripts]
+validate-beadtrain = "beadtrains.validate:main"
+
 [project.optional-dependencies]
 dev = ["pytest>=8", "pytest-timeout>=2"]
 
+[tool.setuptools.packages.find]
+include = ["beadtrains*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]

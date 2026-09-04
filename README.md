@@ -21,7 +21,17 @@ python scripts/validate_beadtrain.py examples/example_primary_demo.beadtrain
 python scripts/validate_beadtrain.py examples/example_secondary_demo.beadtrain
 ```
 
-Classroom examples use fictional `classroom-demo-*` bead ids so CI stays green without your tracker.
+Or install the CLI:
+
+```bash
+pip install "git+https://github.com/acrinym/Beadtrains.git"
+validate-beadtrain examples/
+validate-beadtrain path/to/.beads/
+```
+
+A directory picks up `*.beadtrain` in that folder and one child level (so `examples/` works). Two or more files in one invocation also check that `[[couplers]]` land on real cars in the peer trains. One file is still isolation-only — this tool does not talk to `bd` and does not track itself.
+
+Classroom examples use fictional `classroom-demo-*` bead ids so CI stays green without your tracker. This repository has no `.beadtrain` of its own on purpose.
 
 ## Run a train (agents)
 

@@ -15,13 +15,15 @@ Install this file as `.cursor/skills/beadtrains/SKILL.md` (or the equivalent Cod
 
 ## Read first
 
-1. This package's [SPEC.md](../../SPEC.md) — format **v1.3**
-2. [WORKFLOW.md](../../WORKFLOW.md)
+1. [SPEC.md](https://github.com/acrinym/Beadtrains/blob/main/SPEC.md) — format **v1.3**
+2. [WORKFLOW.md](https://github.com/acrinym/Beadtrains/blob/main/WORKFLOW.md)
 3. Active train file(s) under the host `.beads/*.beadtrain`
 
 Validate (adjust the script path if you copied scripts into `.beads/beadtrains/scripts/`):
 
 ```bash
+validate-beadtrain .beads/<train>.beadtrain
+# or, without install:
 python scripts/validate_beadtrain.py .beads/<train>.beadtrain
 ```
 
