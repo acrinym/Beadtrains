@@ -1,0 +1,22 @@
+# Tiny secondary train for v1.3 coupler capstone (fictional bead ids OK in examples/)
+
+[train]
+name        = "example_secondary_demo"
+title       = "Example secondary (coupler demo)"
+description = """
+Fictional classroom train unlocked after example_primary_demo capstone.
+"""
+created     = "2026-07-15"
+status      = "planned"
+
+[[cars]]
+id             = "start"
+bead           = "classroom-demo-3"
+title          = "Start after coupler"
+parallel_start = true
+depends_on     = []
+summary        = "Unlocked by demo-join coupler from example_primary_demo."
+
+[meta]
+one_liner = "Secondary side of coupler demo."
+prior_car = "example_primary_demo"

@@ -1,0 +1,40 @@
+# Tiny primary train for v1.3 coupler capstone (fictional bead ids OK in examples/)
+
+[train]
+name        = "example_primary_demo"
+title       = "Example primary (coupler demo)"
+description = """
+Fictional classroom train — validates coupler shape only. Bead ids here are
+placeholders for docs/examples, not live bd issues.
+"""
+created     = "2026-07-15"
+status      = "planned"
+
+[[cars]]
+id             = "build"
+bead           = "classroom-demo-1"
+title          = "Build step"
+parallel_start = true
+depends_on     = []
+summary        = "Demo car."
+
+[[cars]]
+id             = "capstone"
+bead           = "classroom-demo-2"
+title          = "Capstone"
+parallel_start = false
+depends_on     = ["build"]
+summary        = "Demo capstone."
+
+[meta]
+one_liner    = "Primary side of coupler demo."
+couples_with = ["example_secondary_demo"]
+
+[[couplers]]
+id         = "demo-join"
+from_train = "example_primary_demo"
+from_car   = "capstone"
+to_train   = "example_secondary_demo"
+to_car     = "start"
+mode       = "after"
+note       = "Classroom coupler example."

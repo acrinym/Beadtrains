@@ -1,0 +1,13 @@
+[project]
+name = "beadtrains"
+version = "1.3.0"
+description = "Full-train execution manifests for Beads (bd)"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-timeout>=2"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
