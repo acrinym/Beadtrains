@@ -30,13 +30,21 @@ Starting any car means the train is one continuous job:
 
 ## Before coding
 
-1. List `.beads/*.beadtrain` in the **host** repo (no drive-wide recursive searches).
-2. Read the train, `[meta].watch`, and couplers.
+1. List trains (no drive-wide recursive searches):
+
+```bash
+python scripts/beadtrain.py list --dir .beads
+python scripts/beadtrain.py ready --dir .beads --issues .beads/issues.jsonl
+```
+
+2. Read the train, `[meta].watch`, and couplers (`beadtrain status` / `beadtrain couplers`).
 3. Run `bd show <bead>` for every car being considered.
 4. Validate:
 
 ```bash
 python scripts/validate_beadtrain.py path/to/<train>.beadtrain
+# or
+python scripts/beadtrain.py validate path/to/<train>.beadtrain
 ```
 
 In a host repo that vendors these scripts under `.beads/beadtrains/`, use that path instead.

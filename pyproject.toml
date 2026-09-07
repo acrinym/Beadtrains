@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "beadtrains"
-version = "1.3.1"
+version = "1.4.0"
 description = "Full-train execution manifests for Beads (bd)"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,6 +12,7 @@ license = { text = "MIT" }
 
 [project.scripts]
 validate-beadtrain = "beadtrains.validate:main"
+beadtrain = "beadtrains.cli:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "pytest-timeout>=2"]

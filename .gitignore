@@ -3,3 +3,6 @@ __pycache__/
 .pytest_cache/
 .venv/
 *.beadstate
+
+# Gas Town University draft — local only until Justin publishes
+/docs/university/
