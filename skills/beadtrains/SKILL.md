@@ -19,13 +19,26 @@ Install this file as `.cursor/skills/beadtrains/SKILL.md` (or the equivalent Cod
 2. [WORKFLOW.md](https://github.com/acrinym/Beadtrains/blob/main/WORKFLOW.md)
 3. Active train file(s) under the host `.beads/*.beadtrain`
 
-Validate (adjust the script path if you copied scripts into `.beads/beadtrains/scripts/`):
+Validate and inspect (adjust the script path if you copied scripts into `.beads/beadtrains/scripts/`):
 
 ```bash
-validate-beadtrain .beads/<train>.beadtrain
-# or, without install:
+beadtrain validate .beads/<train>.beadtrain
+beadtrain list --dir .beads
+beadtrain ready --dir .beads --issues .beads/issues.jsonl
+# without install:
 python scripts/validate_beadtrain.py .beads/<train>.beadtrain
+python scripts/beadtrain.py list --dir .beads
 ```
+
+Scaffold:
+
+```bash
+beadtrain init my_arc --template capability --dir .beads --bead-prefix PREFIX
+```
+
+Templates: `capability`, `audit_then_build`, `coupled`. Replace placeholder bead ids with real `bd` ids.
+
+Agent guide: [docs/guides/BEADTRAINS_FOR_AI_AGENTS.md](../../docs/guides/BEADTRAINS_FOR_AI_AGENTS.md)
 
 ## Finding train files
 

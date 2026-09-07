@@ -12,13 +12,16 @@ A train is a TOML manifest: cars point at **real** `bd` ids, run in order (or in
 
 **Requires:** [Beads](https://github.com/steveyegge/beads) (`bd`) installed. This repo does **not** vendor Beads.
 
-## Validate
+## Validate and inspect
 
 Python 3.11+ (`tomllib`):
 
 ```bash
-python scripts/validate_beadtrain.py examples/example_primary_demo.beadtrain
-python scripts/validate_beadtrain.py examples/example_secondary_demo.beadtrain
+python scripts/validate_beadtrain.py examples/
+python scripts/beadtrain.py list --dir examples
+python scripts/beadtrain.py ready --dir examples --issues path/to/issues.jsonl
+python scripts/beadtrain.py couplers --dir examples
+python scripts/beadtrain.py init my_arc --template capability --dir .beads --bead-prefix PREFIX
 ```
 
 Or install the CLI:
@@ -26,12 +29,17 @@ Or install the CLI:
 ```bash
 pip install "git+https://github.com/acrinym/Beadtrains.git"
 validate-beadtrain examples/
-validate-beadtrain path/to/.beads/
+beadtrain list --dir examples
+beadtrain validate path/to/.beads/
 ```
 
-A directory picks up `*.beadtrain` in that folder and one child level (so `examples/` works). Two or more files in one invocation also check that `[[couplers]]` land on real cars in the peer trains. One file is still isolation-only — this tool does not talk to `bd` and does not track itself.
+A directory picks up `*.beadtrain` in that folder and one child level (so `examples/` works). Two or more files in one invocation also check that `[[couplers]]` land on real cars in the peer trains. `beadtrain ready` reads a `bd export` JSONL; it does not spawn `bd`.
 
 Classroom examples use fictional `classroom-demo-*` bead ids so CI stays green without your tracker. This repository has no `.beadtrain` of its own on purpose.
+
+Agent-oriented usage: [docs/guides/BEADTRAINS_FOR_AI_AGENTS.md](docs/guides/BEADTRAINS_FOR_AI_AGENTS.md). Templates: `capability`, `audit_then_build`, `coupled`.
+
+A desktop view of the same files lives in [Beadbox](https://github.com/beadbox/beadbox) (Trains tab) when the workspace has `*.beadtrain` next to beads.
 
 ## Run a train (agents)
 
@@ -45,6 +53,8 @@ Optional V3 orchestration: [PROTOCOL.md](PROTOCOL.md) and `scripts/beadtrain_v3.
 |---|---|
 | [SPEC.md](SPEC.md) | v1.3 TOML format |
 | [WORKFLOW.md](WORKFLOW.md) | Full-train execution |
+| [docs/guides/BEADTRAINS_FOR_AI_AGENTS.md](docs/guides/BEADTRAINS_FOR_AI_AGENTS.md) | Agent CLI + templates |
+| `scripts/beadtrain.py` | list / status / ready / couplers / init / validate |
 | `scripts/validate_beadtrain.py` | Schema + coupler + optional V3 field checks |
 | `scripts/beadtrain_v3.py` + `v3/engine.py` | Durable state CLI |
 | `examples/` | Fictional coupler pair |
