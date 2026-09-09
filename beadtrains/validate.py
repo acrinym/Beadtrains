@@ -25,6 +25,7 @@ VALID_STATUS = {"planned", "in_progress", "complete"}
 VALID_COUPLER_MODE = {"after", "with"}
 VALID_PROTOCOL_VERSIONS = {"3", "3.0"}
 CREATED_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+TRAIN_NAME = re.compile(r"^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$")
 
 
 def _load(path: Path) -> dict:
@@ -160,8 +161,11 @@ def validate(path: Path) -> list[str]:
     created = str(train.get("created") or "").strip()
     if created and not CREATED_DATE.match(created):
         errors.append("[train].created must be YYYY-MM-DD")
-    if str(train.get("name") or "").strip() and path.stem != str(train["name"]).strip():
-        errors.append(f"filename stem '{path.stem}' must match [train].name '{train['name']}'")
+    train_name = str(train.get("name") or "").strip()
+    if train_name and not TRAIN_NAME.fullmatch(train_name):
+        errors.append("[train].name must be a snake_case slug")
+    if train_name and path.stem != train_name:
+        errors.append(f"filename stem '{path.stem}' must match [train].name '{train_name}'")
 
     cars = data.get("cars")
     if not isinstance(cars, list) or not cars:
@@ -281,7 +285,6 @@ def validate_paths(paths: list[Path]) -> dict[Path, list[str]]:
 
     if len(paths) >= 2:
         for message in _cross_file_couplers(loaded):
-            # Attach to the file named at the start of the message when possible.
             attached = False
             for path in per_file:
                 if message.startswith(path.name + ":"):
