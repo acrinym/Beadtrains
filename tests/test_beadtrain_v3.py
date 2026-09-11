@@ -111,3 +111,52 @@ def test_corrupt_state_is_rejected(tmp_path: Path) -> None:
     state.write_text("EVENT x\ntype=car.claimed\n", encoding="utf-8")
     with pytest.raises(BeadTrainError):
         read_events(state)
+
+
+def test_validated_car_retains_claim_for_terminal_completion(tmp_path: Path) -> None:
+    from engine import require_claim
+
+    train = load_train(write_train(tmp_path))
+    state_path = state_path_for(train.path)
+    claim_id = "validated-claim"
+    append_event(state_path, make_event(
+        train, "car.claimed", car="foundation", actor="cursor",
+        claim=claim_id, lease_minutes=45,
+    ))
+    append_event(state_path, make_event(
+        train, "car.started", car="foundation", actor="cursor",
+        claim=claim_id, lease_minutes=45,
+    ))
+    append_event(state_path, make_event(
+        train, "car.validated", car="foundation", actor="cursor",
+        claim=claim_id, fields={"commit": "abc", "tests": "passed"},
+    ))
+    snapshot = materialize(train, read_events(state_path))
+    assert snapshot.states["foundation"].state == "validated"
+    with pytest.raises(BeadTrainError):
+        require_claim(snapshot, "foundation", "cursor", claim_id)
+    require_claim(snapshot, "foundation", "cursor", claim_id, allow_validated=True)
+    append_event(state_path, make_event(
+        train, "car.completed", car="foundation", actor="cursor",
+        claim=claim_id, fields={"commit": "abc", "tests": "passed"},
+    ))
+    assert materialize(train, read_events(state_path)).states["foundation"].state == "complete"
+
+
+def test_expired_validated_car_is_abandoned_and_retryable(tmp_path: Path) -> None:
+    train = load_train(write_train(tmp_path))
+    claim = make_event(
+        train, "car.claimed", car="foundation", actor="cursor",
+        claim="expired-validated", lease_minutes=1,
+    )
+    validated = make_event(
+        train, "car.validated", car="foundation", actor="cursor",
+        claim="expired-validated", fields={"commit": "abc", "tests": "passed"},
+    )
+    snapshot = materialize(
+        train,
+        [claim, validated],
+        now=claim.at + timedelta(minutes=2),
+    )
+    assert snapshot.states["foundation"].state == "abandoned"
+    assert [car.id for car in ready_cars(snapshot, ["python"])] == ["foundation"]

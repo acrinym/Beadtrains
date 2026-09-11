@@ -14,6 +14,7 @@ import tomllib
 
 TERMINAL = {"complete", "superseded"}
 ACTIVE = {"claimed", "running", "awaiting_review"}
+LEASED = ACTIVE | {"validated"}
 VALID_STATES = {
     "planned", "ready", "claimed", "running", "blocked", "awaiting_review",
     "validated", "complete", "failed", "abandoned", "superseded",
@@ -105,7 +106,7 @@ class CarState:
     reason: str | None = None
 
     def lease_active(self, now: datetime) -> bool:
-        return self.state in ACTIVE and self.lease_until is not None and self.lease_until > now
+        return self.lease_until is not None and self.lease_until > now
 
 
 @dataclass(frozen=True)
@@ -267,7 +268,7 @@ def materialize(train: Train, events: Iterable[Event], now: datetime | None = No
             state.lease_until = None
 
     for state in states.values():
-        if state.state in ACTIVE and not state.lease_active(now):
+        if state.state in LEASED and not state.lease_active(now):
             state.state = "abandoned"
             state.lease_until = None
     return Snapshot(train, states, event_list)
@@ -288,9 +289,12 @@ def ready_cars(snapshot: Snapshot, capabilities: Iterable[str] = ()) -> list[Car
     return ready
 
 
-def require_claim(snapshot: Snapshot, car_id: str, actor: str, claim: str) -> CarState:
+def require_claim(snapshot: Snapshot, car_id: str, actor: str, claim: str, *,
+                  allow_validated: bool = False) -> CarState:
     state = snapshot.states[car_id]
-    if state.actor != actor or state.claim != claim or not state.lease_active(utc_now()):
+    allowed_states = LEASED if allow_validated else ACTIVE
+    if (state.state not in allowed_states or state.actor != actor or
+            state.claim != claim or not state.lease_active(utc_now())):
         raise BeadTrainError(f"active claim for {car_id} does not belong to {actor}/{claim}")
     return state
 
