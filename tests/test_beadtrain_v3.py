@@ -133,9 +133,30 @@ def test_validated_car_retains_claim_for_terminal_completion(tmp_path: Path) -> 
     ))
     snapshot = materialize(train, read_events(state_path))
     assert snapshot.states["foundation"].state == "validated"
-    require_claim(snapshot, "foundation", "cursor", claim_id)
+    with pytest.raises(BeadTrainError):
+        require_claim(snapshot, "foundation", "cursor", claim_id)
+    require_claim(snapshot, "foundation", "cursor", claim_id, allow_validated=True)
     append_event(state_path, make_event(
         train, "car.completed", car="foundation", actor="cursor",
         claim=claim_id, fields={"commit": "abc", "tests": "passed"},
     ))
     assert materialize(train, read_events(state_path)).states["foundation"].state == "complete"
+
+
+def test_expired_validated_car_is_abandoned_and_retryable(tmp_path: Path) -> None:
+    train = load_train(write_train(tmp_path))
+    claim = make_event(
+        train, "car.claimed", car="foundation", actor="cursor",
+        claim="expired-validated", lease_minutes=1,
+    )
+    validated = make_event(
+        train, "car.validated", car="foundation", actor="cursor",
+        claim="expired-validated", fields={"commit": "abc", "tests": "passed"},
+    )
+    snapshot = materialize(
+        train,
+        [claim, validated],
+        now=claim.at + timedelta(minutes=2),
+    )
+    assert snapshot.states["foundation"].state == "abandoned"
+    assert [car.id for car in ready_cars(snapshot, ["python"])] == ["foundation"]

@@ -103,7 +103,13 @@ def command_start(args: argparse.Namespace) -> int:
 def command_transition(args: argparse.Namespace, event_type: str) -> int:
     train, state_path, snapshot = _load(args.train)
     if event_type not in {"car.released", "car.superseded"}:
-        require_claim(snapshot, args.car, args.actor, args.claim)
+        require_claim(
+            snapshot,
+            args.car,
+            args.actor,
+            args.claim,
+            allow_validated=event_type == "car.completed",
+        )
     evidence = _fields(args.evidence)
     if args.reason:
         evidence["reason"] = args.reason
