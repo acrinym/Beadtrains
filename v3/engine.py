@@ -105,7 +105,7 @@ class CarState:
     reason: str | None = None
 
     def lease_active(self, now: datetime) -> bool:
-        return self.state in ACTIVE and self.lease_until is not None and self.lease_until > now
+        return self.lease_until is not None and self.lease_until > now
 
 
 @dataclass(frozen=True)
