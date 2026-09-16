@@ -1,0 +1,90 @@
+[train]
+name        = "cycloside_windows31_generation"
+title       = "Windows 3.1 generation schemas, Resource Studio, and Experience"
+description = """
+Make Windows 3.1 a first-class Cycloside generation rather than a visual preset.
+Native mode exposes only the formats, schemas, editors, and customization
+surfaces assigned to this generation. Explicit compatibility mode may open or
+use later resources without reclassifying them as Windows 3.1-native.
+"""
+created     = "2026-09-16"
+status      = "planned"
+
+[[cars]]
+id             = "generation_profile"
+bead           = "__PENDING_WIN31_GENERATION_PROFILE__"
+title          = "Define Windows 3.1 generation capability profile"
+parallel_start = true
+depends_on     = []
+summary        = "One canonical generation contract drives Experience and Resource Studio native-vs-compatibility capability discovery."
+
+[[cars]]
+id             = "personalization_schema"
+bead           = "__PENDING_WIN31_PERSONALIZATION_SCHEMA__"
+title          = "Model Windows 3.1 personalization schemas and adapters"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Typed, versioned schemas cover Win3.1 personalization and preserve unknown source fields for round trips."
+
+[[cars]]
+id             = "ico_cur_codec"
+bead           = "__PENDING_WIN31_ICO_CUR_CODEC__"
+title          = "Build shared ICO/CUR read-write codec and conversion model"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Open, inspect, edit, save, and convert ICO/CUR while preserving variants and cursor hotspots."
+
+[[cars]]
+id             = "resource_studio"
+bead           = "__PENDING_WIN31_RESOURCE_STUDIO__"
+title          = "Build Windows 3.1 Resource Studio surfaces"
+parallel_start = false
+depends_on     = ["personalization_schema", "ico_cur_codec"]
+summary        = "Generation-aware form/tree/raw editors expose only Win3.1-native controls unless compatibility is explicit."
+
+[[cars]]
+id             = "experience_runtime"
+bead           = "__PENDING_WIN31_EXPERIENCE_RUNTIME__"
+title          = "Wire Windows 3.1 Experience personalization runtime"
+parallel_start = false
+depends_on     = ["personalization_schema", "ico_cur_codec"]
+summary        = "Apply world-owned Windows 3.1 appearance inside the Experience without mutating the host shell by default."
+
+[[cars]]
+id             = "compatibility_path"
+bead           = "__PENDING_WIN31_COMPATIBILITY_PATH__"
+title          = "Add explicit cross-generation compatibility open/use path"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Later-generation resources may be deliberately opened or used but remain visibly non-native to Windows 3.1."
+
+[[cars]]
+id             = "capstone"
+bead           = "__PENDING_WIN31_CAPSTONE__"
+title          = "Capstone Windows 3.1 generation authoring and Experience"
+parallel_start = false
+depends_on     = ["resource_studio", "experience_runtime", "compatibility_path"]
+summary        = "Round-trip representative resources/configuration, exercise generation bounds, reapply authored appearance, and run Cycloside quality gates."
+
+[meta]
+one_liner = "Windows 3.1 becomes a generation-scoped, editable Cycloside Experience instead of a skin."
+watch = "Live bead IDs must come from Cycloside/.beads. Historical Microsoft material is reference/oracle only. No worktree."
+couples_with = ["cycloside_windows98_generation"]
+
+[[couplers]]
+id         = "win31-profile-to-win98-profile"
+from_train = "cycloside_windows31_generation"
+from_car   = "generation_profile"
+to_train   = "cycloside_windows98_generation"
+to_car     = "generation_profile"
+mode       = "after"
+note       = "Windows 98 inherits the shared earlier-generation capability model."
+
+[[couplers]]
+id         = "win31-codec-to-win98-resource-studio"
+from_train = "cycloside_windows31_generation"
+from_car   = "ico_cur_codec"
+to_train   = "cycloside_windows98_generation"
+to_car     = "icon_library_studio"
+mode       = "after"
+note       = "Windows 98 resource-container work reuses the shared ICO/CUR authoring codec."

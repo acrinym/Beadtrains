@@ -1,0 +1,81 @@
+[train]
+name        = "cycloside_windows98_generation"
+title       = "Windows 98 generation schemas, Resource Studio, and Experience"
+description = """
+Finish Classic 98 as a generation-scoped Cycloside Experience. Inherit shared
+earlier resource capabilities, then add Windows 98/Plus-era schemas, editors,
+formats, Active Desktop, and icon-library workflows. Later-generation assets
+remain available only through the explicit compatibility path.
+"""
+created     = "2026-09-16"
+status      = "planned"
+
+[[cars]]
+id             = "generation_profile"
+bead           = "__PENDING_WIN98_GENERATION_PROFILE__"
+title          = "Define Windows 98 generation profile and inherited capabilities"
+parallel_start = true
+depends_on     = []
+summary        = "Model Windows 98 as an inherited generation contract instead of another pile of hard-coded feature checks."
+
+[[cars]]
+id             = "theme_schema_editor"
+bead           = "__PENDING_WIN98_THEME_SCHEMA_EDITOR__"
+title          = "Make Windows 98 theme schemas fully open/edit/save round-trip"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Build on PR #407 Classic 9x parsing/compiler work with preserved unknowns, editing, write-back/export, and safe preview."
+
+[[cars]]
+id             = "native_cursor_runtime"
+bead           = "__PENDING_WIN98_NATIVE_CURSOR_RUNTIME__"
+title          = "Render native ICO CUR ANI assets in Classic 9x"
+parallel_start = true
+depends_on     = []
+summary        = "Reuse the PR #407 implementation frontier for bounded CUR/ANI parsing, timing/hotspots, Windows decoding, and runtime animation."
+
+[[cars]]
+id             = "cursor_sound_editors"
+bead           = "__PENDING_WIN98_CURSOR_SOUND_EDITORS__"
+title          = "Build Windows 98 cursor and sound scheme editors"
+parallel_start = false
+depends_on     = ["generation_profile", "native_cursor_runtime"]
+summary        = "Add role-based cursor schemes, ANI timeline/hotspot editing, sound-event mapping, preview, save/reopen, and Experience import."
+
+[[cars]]
+id             = "icon_library_studio"
+bead           = "__PENDING_WIN98_ICON_LIBRARY_STUDIO__"
+title          = "Build Windows 98 icon-library and resource-container studio"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Open ICL and compatible NE/PE resource containers, browse groups/variants, extract ICO/CUR, edit supported resources, and preserve unknowns."
+
+[[cars]]
+id             = "experience_personalization"
+bead           = "__PENDING_WIN98_EXPERIENCE_PERSONALIZATION__"
+title          = "Wire Windows 98 Experience generation-aware personalization"
+parallel_start = false
+depends_on     = ["theme_schema_editor", "cursor_sound_editors", "icon_library_studio"]
+summary        = "Expose the Windows 98-native customization palette and apply authored resources through the world-owned integrity model."
+
+[[cars]]
+id             = "active_desktop"
+bead           = "__PENDING_WIN98_ACTIVE_DESKTOP__"
+title          = "Host Active Desktop inside Classic 9x"
+parallel_start = false
+depends_on     = ["experience_personalization"]
+summary        = "Recreate Active Desktop as a bounded Experience-owned HTML/component layer rather than inheriting period IE trust."
+
+[[cars]]
+id             = "capstone"
+bead           = "__PENDING_WIN98_CAPSTONE__"
+title          = "Capstone Windows 98 schemas Resource Studio and Experience"
+parallel_start = false
+depends_on     = ["experience_personalization", "active_desktop", "native_cursor_runtime"]
+summary        = "Qualify .theme round-trip, ICO/CUR/ANI authoring, cursor/sound schemes, ICL/resource workflows, Active Desktop, generation bounds, provenance, build, and tests."
+
+[meta]
+one_liner = "Windows 98 becomes an inherited generation with its own authentic personalization technology and editors."
+prior_car = "cycloside_windows31_generation"
+watch = "Live bead IDs must come from Cycloside/.beads. Current implementation frontier is draft NewIdeas PR #407 at 8b1e884533fcd051de84de741d14c9d872164b20. No worktree."
+couples_with = ["cycloside_windows31_generation"]
