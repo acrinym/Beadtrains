@@ -12,7 +12,7 @@ status      = "planned"
 
 [[cars]]
 id             = "generation_profile"
-bead           = "__PENDING_WIN31_GENERATION_PROFILE__"
+bead           = "Cycloside-0j7.1"
 title          = "Define Windows 3.1 generation capability profile"
 parallel_start = true
 depends_on     = []
@@ -20,7 +20,7 @@ summary        = "One canonical generation contract drives Experience and Resour
 
 [[cars]]
 id             = "personalization_schema"
-bead           = "__PENDING_WIN31_PERSONALIZATION_SCHEMA__"
+bead           = "Cycloside-0j7.2"
 title          = "Model Windows 3.1 personalization schemas and adapters"
 parallel_start = false
 depends_on     = ["generation_profile"]
@@ -28,7 +28,7 @@ summary        = "Typed, versioned schemas cover Win3.1 personalization and pres
 
 [[cars]]
 id             = "ico_cur_codec"
-bead           = "__PENDING_WIN31_ICO_CUR_CODEC__"
+bead           = "Cycloside-0j7.3"
 title          = "Build shared ICO/CUR read-write codec and conversion model"
 parallel_start = false
 depends_on     = ["generation_profile"]
@@ -36,7 +36,7 @@ summary        = "Open, inspect, edit, save, and convert ICO/CUR while preservin
 
 [[cars]]
 id             = "resource_studio"
-bead           = "__PENDING_WIN31_RESOURCE_STUDIO__"
+bead           = "Cycloside-0j7.4"
 title          = "Build Windows 3.1 Resource Studio surfaces"
 parallel_start = false
 depends_on     = ["personalization_schema", "ico_cur_codec"]
@@ -44,7 +44,7 @@ summary        = "Generation-aware form/tree/raw editors expose only Win3.1-nati
 
 [[cars]]
 id             = "experience_runtime"
-bead           = "__PENDING_WIN31_EXPERIENCE_RUNTIME__"
+bead           = "Cycloside-0j7.5"
 title          = "Wire Windows 3.1 Experience personalization runtime"
 parallel_start = false
 depends_on     = ["personalization_schema", "ico_cur_codec"]
@@ -52,7 +52,7 @@ summary        = "Apply world-owned Windows 3.1 appearance inside the Experience
 
 [[cars]]
 id             = "compatibility_path"
-bead           = "__PENDING_WIN31_COMPATIBILITY_PATH__"
+bead           = "Cycloside-0j7.6"
 title          = "Add explicit cross-generation compatibility open/use path"
 parallel_start = false
 depends_on     = ["generation_profile"]
@@ -60,7 +60,7 @@ summary        = "Later-generation resources may be deliberately opened or used 
 
 [[cars]]
 id             = "capstone"
-bead           = "__PENDING_WIN31_CAPSTONE__"
+bead           = "Cycloside-0j7.7"
 title          = "Capstone Windows 3.1 generation authoring and Experience"
 parallel_start = false
 depends_on     = ["resource_studio", "experience_runtime", "compatibility_path"]
@@ -68,7 +68,7 @@ summary        = "Round-trip representative resources/configuration, exercise ge
 
 [meta]
 one_liner = "Windows 3.1 becomes a generation-scoped, editable Cycloside Experience instead of a skin."
-watch = "Live bead IDs must come from Cycloside/.beads. Historical Microsoft material is reference/oracle only. No worktree."
+watch = "Live beads are in NewIdeas/Cycloside/.beads under epic Cycloside-0j7. Historical Microsoft material is reference/oracle only. No worktree."
 couples_with = ["cycloside_windows98_generation"]
 
 [[couplers]]

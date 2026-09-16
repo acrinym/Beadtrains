@@ -12,7 +12,7 @@ status      = "planned"
 
 [[cars]]
 id             = "generation_profile"
-bead           = "__PENDING_WIN98_GENERATION_PROFILE__"
+bead           = "Cycloside-wnk.1"
 title          = "Define Windows 98 generation profile and inherited capabilities"
 parallel_start = true
 depends_on     = []
@@ -20,7 +20,7 @@ summary        = "Model Windows 98 as an inherited generation contract instead o
 
 [[cars]]
 id             = "theme_schema_editor"
-bead           = "__PENDING_WIN98_THEME_SCHEMA_EDITOR__"
+bead           = "Cycloside-wnk.2"
 title          = "Make Windows 98 theme schemas fully open/edit/save round-trip"
 parallel_start = false
 depends_on     = ["generation_profile"]
@@ -28,7 +28,7 @@ summary        = "Build on PR #407 Classic 9x parsing/compiler work with preserv
 
 [[cars]]
 id             = "native_cursor_runtime"
-bead           = "__PENDING_WIN98_NATIVE_CURSOR_RUNTIME__"
+bead           = "Cycloside-wnk.3"
 title          = "Render native ICO CUR ANI assets in Classic 9x"
 parallel_start = true
 depends_on     = []
@@ -36,7 +36,7 @@ summary        = "Reuse the PR #407 implementation frontier for bounded CUR/ANI 
 
 [[cars]]
 id             = "cursor_sound_editors"
-bead           = "__PENDING_WIN98_CURSOR_SOUND_EDITORS__"
+bead           = "Cycloside-wnk.4"
 title          = "Build Windows 98 cursor and sound scheme editors"
 parallel_start = false
 depends_on     = ["generation_profile", "native_cursor_runtime"]
@@ -44,7 +44,7 @@ summary        = "Add role-based cursor schemes, ANI timeline/hotspot editing, s
 
 [[cars]]
 id             = "icon_library_studio"
-bead           = "__PENDING_WIN98_ICON_LIBRARY_STUDIO__"
+bead           = "Cycloside-wnk.5"
 title          = "Build Windows 98 icon-library and resource-container studio"
 parallel_start = false
 depends_on     = ["generation_profile"]
@@ -52,7 +52,7 @@ summary        = "Open ICL and compatible NE/PE resource containers, browse grou
 
 [[cars]]
 id             = "experience_personalization"
-bead           = "__PENDING_WIN98_EXPERIENCE_PERSONALIZATION__"
+bead           = "Cycloside-wnk.6"
 title          = "Wire Windows 98 Experience generation-aware personalization"
 parallel_start = false
 depends_on     = ["theme_schema_editor", "cursor_sound_editors", "icon_library_studio"]
@@ -60,7 +60,7 @@ summary        = "Expose the Windows 98-native customization palette and apply a
 
 [[cars]]
 id             = "active_desktop"
-bead           = "__PENDING_WIN98_ACTIVE_DESKTOP__"
+bead           = "Cycloside-wnk.7"
 title          = "Host Active Desktop inside Classic 9x"
 parallel_start = false
 depends_on     = ["experience_personalization"]
@@ -68,7 +68,7 @@ summary        = "Recreate Active Desktop as a bounded Experience-owned HTML/com
 
 [[cars]]
 id             = "capstone"
-bead           = "__PENDING_WIN98_CAPSTONE__"
+bead           = "Cycloside-wnk.8"
 title          = "Capstone Windows 98 schemas Resource Studio and Experience"
 parallel_start = false
 depends_on     = ["experience_personalization", "active_desktop", "native_cursor_runtime"]
@@ -77,5 +77,4 @@ summary        = "Qualify .theme round-trip, ICO/CUR/ANI authoring, cursor/sound
 [meta]
 one_liner = "Windows 98 becomes an inherited generation with its own authentic personalization technology and editors."
 prior_car = "cycloside_windows31_generation"
-watch = "Live bead IDs must come from Cycloside/.beads. Current implementation frontier is draft NewIdeas PR #407 at 8b1e884533fcd051de84de741d14c9d872164b20. No worktree."
-couples_with = ["cycloside_windows31_generation"]
+watch = "Live beads are in NewIdeas/Cycloside/.beads under epic Cycloside-wnk. Current implementation frontier is draft NewIdeas PR #407 at 8b1e884533fcd051de84de741d14c9d872164b20. No worktree."
