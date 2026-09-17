@@ -55,7 +55,7 @@ id             = "experience_personalization"
 bead           = "Cycloside-wnk.6"
 title          = "Wire Windows 98 Experience generation-aware personalization"
 parallel_start = false
-depends_on     = ["theme_schema_editor", "cursor_sound_editors", "icon_library_studio"]
+depends_on     = ["theme_schema_editor", "cursor_sound_editors", "icon_library_studio", "active_desktop"]
 summary        = "Expose the Windows 98-native customization palette and apply authored resources through the world-owned integrity model."
 
 [[cars]]
@@ -63,8 +63,8 @@ id             = "active_desktop"
 bead           = "Cycloside-wnk.7"
 title          = "Host Active Desktop inside Classic 9x"
 parallel_start = false
-depends_on     = ["experience_personalization"]
-summary        = "Recreate Active Desktop as a bounded Experience-owned HTML/component layer rather than inheriting period IE trust."
+depends_on     = ["generation_profile"]
+summary        = "Model/edit Desktop.htt-style configuration, HTML wallpaper, components, layout/provenance, and host the result as a bounded Experience-owned HTML desktop layer."
 
 [[cars]]
 id             = "capstone"
