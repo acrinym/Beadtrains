@@ -8,7 +8,7 @@ formats, Active Desktop, and icon-library workflows. Later-generation assets
 remain available only through the explicit compatibility path.
 """
 created     = "2026-09-16"
-status      = "planned"
+status      = "in_progress"
 
 [[cars]]
 id             = "generation_profile"
