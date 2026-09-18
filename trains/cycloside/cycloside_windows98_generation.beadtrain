@@ -8,7 +8,7 @@ formats, Active Desktop, and icon-library workflows. Later-generation assets
 remain available only through the explicit compatibility path.
 """
 created     = "2026-09-16"
-status      = "in_progress"
+status      = "complete"
 
 [[cars]]
 id             = "generation_profile"
@@ -77,4 +77,4 @@ summary        = "Qualify .theme round-trip, ICO/CUR/ANI authoring, cursor/sound
 [meta]
 one_liner = "Windows 98 becomes an inherited generation with its own authentic personalization technology and editors."
 prior_car = "cycloside_windows31_generation"
-watch = "Live beads are in NewIdeas/Cycloside/.beads under epic Cycloside-wnk. NewIdeas PR #407 head d0338d8c is qualified at 579/579 tests; wnk.2 and wnk.5 are closed, while wnk.4 role-complete cursor runtime and wnk.7 bounded HTML/website hosting remain open. No worktree."
+watch = "Cycloside-wnk and capstone are closed. Qualified NewIdeas PR #407 head d0338d8c: 579/579 full tests, Windows build 0 errors, generation bounds and Active Desktop/resource-container flows qualified. Historical Microsoft material is reference/oracle only. No worktree."
