@@ -1,0 +1,80 @@
+[train]
+name        = "cycloside_windows98_generation"
+title       = "Windows 98 generation schemas, Resource Studio, and Experience"
+description = """
+Finish Classic 98 as a generation-scoped Cycloside Experience. Inherit shared
+earlier resource capabilities, then add Windows 98/Plus-era schemas, editors,
+formats, Active Desktop, and icon-library workflows. Later-generation assets
+remain available only through the explicit compatibility path.
+"""
+created     = "2026-09-16"
+status      = "complete"
+
+[[cars]]
+id             = "generation_profile"
+bead           = "Cycloside-wnk.1"
+title          = "Define Windows 98 generation profile and inherited capabilities"
+parallel_start = true
+depends_on     = []
+summary        = "Model Windows 98 as an inherited generation contract instead of another pile of hard-coded feature checks."
+
+[[cars]]
+id             = "theme_schema_editor"
+bead           = "Cycloside-wnk.2"
+title          = "Make Windows 98 theme schemas fully open/edit/save round-trip"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Build on PR #407 Classic 9x parsing/compiler work with preserved unknowns, editing, write-back/export, and safe preview."
+
+[[cars]]
+id             = "native_cursor_runtime"
+bead           = "Cycloside-wnk.3"
+title          = "Render native ICO CUR ANI assets in Classic 9x"
+parallel_start = true
+depends_on     = []
+summary        = "Reuse the PR #407 implementation frontier for bounded CUR/ANI parsing, timing/hotspots, Windows decoding, and runtime animation."
+
+[[cars]]
+id             = "cursor_sound_editors"
+bead           = "Cycloside-wnk.4"
+title          = "Build Windows 98 cursor and sound scheme editors"
+parallel_start = false
+depends_on     = ["generation_profile", "native_cursor_runtime"]
+summary        = "Add role-based cursor schemes, ANI timeline/hotspot editing, sound-event mapping, preview, save/reopen, and Experience import."
+
+[[cars]]
+id             = "icon_library_studio"
+bead           = "Cycloside-wnk.5"
+title          = "Build Windows 98 icon-library and resource-container studio"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Open ICL and compatible NE/PE resource containers, browse groups/variants, extract ICO/CUR, edit supported resources, and preserve unknowns."
+
+[[cars]]
+id             = "experience_personalization"
+bead           = "Cycloside-wnk.6"
+title          = "Wire Windows 98 Experience generation-aware personalization"
+parallel_start = false
+depends_on     = ["theme_schema_editor", "cursor_sound_editors", "icon_library_studio", "active_desktop"]
+summary        = "Expose the Windows 98-native customization palette and apply authored resources through the world-owned integrity model."
+
+[[cars]]
+id             = "active_desktop"
+bead           = "Cycloside-wnk.7"
+title          = "Host Active Desktop inside Classic 9x"
+parallel_start = false
+depends_on     = ["generation_profile"]
+summary        = "Model/edit Desktop.htt-style configuration, HTML wallpaper, components, layout/provenance, and host the result as a bounded Experience-owned HTML desktop layer."
+
+[[cars]]
+id             = "capstone"
+bead           = "Cycloside-wnk.8"
+title          = "Capstone Windows 98 schemas Resource Studio and Experience"
+parallel_start = false
+depends_on     = ["experience_personalization", "active_desktop", "native_cursor_runtime"]
+summary        = "Qualify .theme round-trip, ICO/CUR/ANI authoring, cursor/sound schemes, ICL/resource workflows, Active Desktop, generation bounds, provenance, build, and tests."
+
+[meta]
+one_liner = "Windows 98 becomes an inherited generation with its own authentic personalization technology and editors."
+prior_car = "cycloside_windows31_generation"
+watch = "Cycloside-wnk and capstone are closed. Qualified NewIdeas PR #407 head d0338d8c: 579/579 full tests, Windows build 0 errors, generation bounds and Active Desktop/resource-container flows qualified. Historical Microsoft material is reference/oracle only. No worktree."
