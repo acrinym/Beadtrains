@@ -1,0 +1,59 @@
+{
+  "schema": "hte-code-repo-profile/1.0",
+  "id": "acrinym__Beadtrains",
+  "repo": "D:\\github\\Beadtrains",
+  "origin": "https://github.com/acrinym/Beadtrains.git",
+  "head_at_scan": "d2182a1a67fdbcdc0c4531c2e6c2abf98b2e4194",
+  "branch_at_scan": "trains/emojineer-1-0-productization",
+  "baseline": "hte-code-v2-depth5",
+  "packs": [
+    "language.python",
+    "framework.pytest",
+    "runtime.cpython",
+    "toolchain.github-actions",
+    "toolchain.python-packaging",
+    "format.markdown",
+    "format.yaml",
+    "format.toml"
+  ],
+  "languages": [
+    {
+      "name": "python",
+      "files": 15
+    }
+  ],
+  "frameworks": [
+    "pytest"
+  ],
+  "compilers": [],
+  "runtimes": [
+    "cpython"
+  ],
+  "toolchains": [
+    "github-actions",
+    "python-packaging"
+  ],
+  "platforms": [],
+  "interop": [],
+  "formats": [
+    {
+      "name": "markdown",
+      "files": 9
+    },
+    {
+      "name": "yaml",
+      "files": 1
+    },
+    {
+      "name": "toml",
+      "files": 1
+    }
+  ],
+  "protocols": [],
+  "inclusion_reason": [
+    "curated-first-party-or-maintained",
+    "acrinym-origin",
+    "explicit-override:include",
+    "override-evidence:GitHub estate audit: acrinym-owned non-fork acrinym/Beadtrains."
+  ]
+}

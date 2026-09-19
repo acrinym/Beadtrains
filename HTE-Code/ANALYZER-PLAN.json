@@ -1,0 +1,123 @@
+{
+  "schema": "hte-code-analyzer-plan/1.0",
+  "repo_profile": "acrinym__Beadtrains",
+  "repo": "D:\\github\\Beadtrains",
+  "head_at_scan": "d2182a1a67fdbcdc0c4531c2e6c2abf98b2e4194",
+  "policy": [
+    "Candidates are not automatic execution instructions.",
+    "Repository-local AGENTS/CLAUDE/Cursor rules and build documentation take precedence.",
+    "Resolve exact tool version, configuration, target, and environment before using evidence.",
+    "Prefer repository wrappers and configured analyzers over generic candidate forms.",
+    "Static, compile, and unit-test success do not substitute for runtime/integration qualification.",
+    "Do not install tools, mutate dependencies, launch heavy GUI/emulator workloads, or touch external services merely because a candidate appears here."
+  ],
+  "resolved_languages": [
+    "python"
+  ],
+  "evidence_phases": {
+    "availability_probes": [
+      {
+        "language": "python",
+        "candidate": "python --version"
+      }
+    ],
+    "syntax_or_compile": [
+      {
+        "language": "python",
+        "candidate": "python -m compileall -q <source-roots>"
+      }
+    ],
+    "static_analysis": [
+      {
+        "language": "python",
+        "candidate": "ruff check ."
+      },
+      {
+        "language": "python",
+        "candidate": "pyright"
+      },
+      {
+        "language": "python",
+        "candidate": "mypy ."
+      },
+      {
+        "language": "python",
+        "candidate": "bandit -r <source-roots>"
+      }
+    ],
+    "tests": [
+      {
+        "language": "python",
+        "candidate": "python -m pytest"
+      },
+      {
+        "language": "python",
+        "candidate": "python -m unittest discover"
+      }
+    ],
+    "dynamic_analysis": [
+      {
+        "language": "python",
+        "candidate": "coverage run -m pytest"
+      },
+      {
+        "language": "python",
+        "candidate": "tracemalloc / faulthandler / asyncio debug where applicable"
+      }
+    ]
+  },
+  "language_registry": {
+    "python": {
+      "availability_probes": [
+        "python --version"
+      ],
+      "syntax_or_compile": [
+        "python -m compileall -q <source-roots>"
+      ],
+      "static_analysis": [
+        "ruff check .",
+        "pyright",
+        "mypy .",
+        "bandit -r <source-roots>"
+      ],
+      "tests": [
+        "python -m pytest",
+        "python -m unittest discover"
+      ],
+      "dynamic_analysis": [
+        "coverage run -m pytest",
+        "tracemalloc / faulthandler / asyncio debug where applicable"
+      ],
+      "notes": [
+        "Use only tools/configs present in the repo or explicitly installed for analysis; verify interpreter/venv provenance."
+      ]
+    }
+  },
+  "notes": [
+    {
+      "language": "python",
+      "note": "Use only tools/configs present in the repo or explicitly installed for analysis; verify interpreter/venv provenance."
+    }
+  ],
+  "unresolved_nonlanguage_surfaces": {
+    "frameworks": [
+      "pytest"
+    ],
+    "compilers": [],
+    "runtimes": [
+      "cpython"
+    ],
+    "toolchains": [
+      "github-actions",
+      "python-packaging"
+    ],
+    "platforms": [],
+    "interop": [],
+    "formats": [
+      "markdown",
+      "yaml",
+      "toml"
+    ],
+    "protocols": []
+  }
+}

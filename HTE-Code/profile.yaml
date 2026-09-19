@@ -1,0 +1,51 @@
+schema: hte-code-repo-profile/1.0
+repository: "D:\\github\\Beadtrains"
+origin: "https://github.com/acrinym/Beadtrains.git"
+head_at_scan: "d2182a1a67fdbcdc0c4531c2e6c2abf98b2e4194"
+branch_at_scan: "trains/emojineer-1-0-productization"
+dirty_entries_at_scan: 3
+baseline: hte-code-v2-depth5
+central_hte_root: "D:\\github\\HTE-Code"
+baseline_contract: "D:\\github\\HTE-Code\\core\\BASELINE-CONTRACT.md"
+pack_root: "D:\\github\\HTE-Code\\packs"
+composition_mode: additive
+status: generated-from-live-repository
+inclusion_reason:
+  - "curated-first-party-or-maintained"
+  - "acrinym-origin"
+  - "explicit-override:include"
+  - "override-evidence:GitHub estate audit: acrinym-owned non-fork acrinym/Beadtrains."
+packs:
+  language:
+    - "language.python"
+  framework:
+    - "framework.pytest"
+  compiler: []
+  runtime:
+    - "runtime.cpython"
+  toolchain:
+    - "toolchain.github-actions"
+    - "toolchain.python-packaging"
+  platform: []
+  interop: []
+  format:
+    - "format.markdown"
+    - "format.yaml"
+    - "format.toml"
+  protocol: []
+repo_authority:
+  - no-repo-local-authority-files-discovered
+repo_invariants:
+  - discover-from-repo-authority-before-edit
+  - preserve-unrelated-dirty-work
+  - no-worktrees-without-justin-confirmation
+  - hte-depth5-baseline-always-active
+  - all-detected-packs-compose-additively
+qualification:
+  - establish-live-branch-head-dirty-state
+  - use-repo-native-build-and-test-instructions
+  - run-pack-specific-edge-campaigns-for-changed-surfaces
+  - exact-head-evidence-required-for-final-qualification
+learning:
+  motifs: []
+  superseded_motifs: []
